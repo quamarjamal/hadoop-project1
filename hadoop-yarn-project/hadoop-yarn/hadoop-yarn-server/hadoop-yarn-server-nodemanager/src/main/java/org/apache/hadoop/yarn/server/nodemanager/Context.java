@@ -31,6 +31,7 @@ import org.apache.hadoop.yarn.server.api.protocolrecords.LogAggregationReport;
 import org.apache.hadoop.yarn.server.api.records.AppCollectorData;
 import org.apache.hadoop.yarn.server.api.records.NodeHealthStatus;
 import org.apache.hadoop.yarn.server.nodemanager.containermanager.ContainerManager;
+import org.apache.hadoop.yarn.server.api.records.OverAllocationInfo;
 import org.apache.hadoop.yarn.server.nodemanager.containermanager.application.Application;
 import org.apache.hadoop.yarn.server.nodemanager.containermanager.container.Container;
 
@@ -125,4 +126,8 @@ public interface Context {
   ContainerStateTransitionListener getContainerStateTransitionListener();
 
   ResourcePluginManager getResourcePluginManager();
+
+  boolean isOverAllocationEnabled();
+
+  OverAllocationInfo getOverAllocationInfo();
 }
