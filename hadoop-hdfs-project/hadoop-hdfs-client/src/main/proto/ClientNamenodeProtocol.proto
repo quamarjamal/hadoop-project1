@@ -801,6 +801,13 @@ message SatisfyStoragePolicyResponseProto {
 
 }
 
+message IsStoragePolicySatisfierRunningRequestProto {  // no parameters
+}
+
+message IsStoragePolicySatisfierRunningResponseProto {
+  required bool running = 1;
+}
+
 service ClientNamenodeProtocol {
   rpc getBlockLocations(GetBlockLocationsRequestProto)
       returns(GetBlockLocationsResponseProto);
@@ -983,4 +990,6 @@ service ClientNamenodeProtocol {
       returns(ListOpenFilesResponseProto);
   rpc satisfyStoragePolicy(SatisfyStoragePolicyRequestProto)
       returns(SatisfyStoragePolicyResponseProto);
+  rpc isStoragePolicySatisfierRunning(IsStoragePolicySatisfierRunningRequestProto)
+      returns(IsStoragePolicySatisfierRunningResponseProto);
 }
