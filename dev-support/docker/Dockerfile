@@ -28,7 +28,7 @@ WORKDIR /root
 ######
 RUN apt-get update && apt-get install --no-install-recommends -y \
     git curl ant make maven \
-    cmake gcc g++ \
+    cmake gcc g++ clang \
     protobuf-compiler libprotoc-dev \
     protobuf-c-compiler libprotobuf-dev \
     build-essential libtool \
