@@ -81,7 +81,7 @@ public class ClusterNodeTracker<N extends SchedulerNode> {
       nodesList.add(node);
 
       // Update cluster capacity
-      Resources.addTo(clusterCapacity, node.getTotalResource());
+      Resources.addTo(clusterCapacity, node.getCapacity());
 
       // Update maximumAllocation
       updateMaxResources(node, true);
@@ -174,7 +174,7 @@ public class ClusterNodeTracker<N extends SchedulerNode> {
       }
 
       // Update cluster capacity
-      Resources.subtractFrom(clusterCapacity, node.getTotalResource());
+      Resources.subtractFrom(clusterCapacity, node.getCapacity());
 
       // Update maximumAllocation
       updateMaxResources(node, false);
@@ -234,7 +234,7 @@ public class ClusterNodeTracker<N extends SchedulerNode> {
   }
 
   private void updateMaxResources(SchedulerNode node, boolean add) {
-    Resource totalResource = node.getTotalResource();
+    Resource totalResource = node.getCapacity();
     writeLock.lock();
     try {
       if (add) { // added node
