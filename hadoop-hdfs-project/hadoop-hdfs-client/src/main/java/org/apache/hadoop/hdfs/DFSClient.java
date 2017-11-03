@@ -125,6 +125,7 @@ import org.apache.hadoop.hdfs.protocol.HdfsConstants;
 import org.apache.hadoop.hdfs.protocol.HdfsConstants.DatanodeReportType;
 import org.apache.hadoop.hdfs.protocol.HdfsConstants.ReencryptAction;
 import org.apache.hadoop.hdfs.protocol.HdfsConstants.RollingUpgradeAction;
+import org.apache.hadoop.hdfs.protocol.HdfsConstants.StoragePolicySatisfyPathStatus;
 import org.apache.hadoop.hdfs.protocol.HdfsConstants.SafeModeAction;
 import org.apache.hadoop.hdfs.protocol.HdfsFileStatus;
 import org.apache.hadoop.hdfs.protocol.LastBlockWithStatus;
@@ -3134,5 +3135,26 @@ public class DFSClient implements java.io.Closeable, RemotePeerFactory,
   public RemoteIterator<OpenFileEntry> listOpenFiles() throws IOException {
     checkOpen();
     return new OpenFilesIterator(namenode, tracer);
+  }
+
+  /**
+   * Check the storage policy satisfy status of the path for which
+   * {@link DFSClient#satisfyStoragePolicy(String)} is called.
+   *
+   * @return Storage policy satisfy status.
+   *         <ul>
+   *         <li>PENDING if path is in queue and not processed for satisfying
+   *         the policy.</li>
+   *         <li>IN_PROGRESS if satisfying the storage policy for path.</li>
+   *         <li>SUCCESS if storage policy satisfied for the path.</li>
+   *         <li>NOT_AVAILABLE if
+   *         {@link DFSClient#satisfyStoragePolicy(String)} not called for
+   *         path or SPS work is already finished.</li>
+   *         </ul>
+   * @throws IOException
+   */
+  public StoragePolicySatisfyPathStatus checkStoragePolicySatisfyPathStatus(
+      String path) throws IOException {
+    return namenode.checkStoragePolicySatisfyPathStatus(path);
   }
 }
