@@ -84,6 +84,7 @@ import org.apache.hadoop.hdfs.protocol.HdfsConstants.DatanodeReportType;
 import org.apache.hadoop.hdfs.protocol.HdfsConstants.ReencryptAction;
 import org.apache.hadoop.hdfs.protocol.HdfsConstants.RollingUpgradeAction;
 import org.apache.hadoop.hdfs.protocol.HdfsConstants.SafeModeAction;
+import org.apache.hadoop.hdfs.protocol.HdfsConstants.StoragePolicySatisfyPathStatus;
 import org.apache.hadoop.hdfs.protocol.HdfsFileStatus;
 import org.apache.hadoop.hdfs.protocol.LastBlockWithStatus;
 import org.apache.hadoop.hdfs.protocol.LocatedBlock;
@@ -2052,5 +2053,23 @@ public class RouterRpcServer extends AbstractService implements ClientProtocol {
   static UserGroupInformation getRemoteUser() throws IOException {
     UserGroupInformation ugi = Server.getRemoteUser();
     return (ugi != null) ? ugi : UserGroupInformation.getCurrentUser();
+  }
+
+  @Override
+  public void satisfyStoragePolicy(String path) throws IOException {
+    checkOperation(OperationCategory.WRITE, false);
+  }
+
+  @Override
+  public boolean isStoragePolicySatisfierRunning() throws IOException {
+    checkOperation(OperationCategory.READ, false);
+    return false;
+  }
+
+  @Override
+  public StoragePolicySatisfyPathStatus checkStoragePolicySatisfyPathStatus(
+      String path) throws IOException {
+    checkOperation(OperationCategory.READ, false);
+    return StoragePolicySatisfyPathStatus.NOT_AVAILABLE;
   }
 }
