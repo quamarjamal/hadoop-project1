@@ -223,6 +223,11 @@ public class FairSchedulerConfiguration extends Configuration {
     return getInt(CONTINUOUS_SCHEDULING_SLEEP_MS, DEFAULT_CONTINUOUS_SCHEDULING_SLEEP_MS);
   }
 
+  public boolean isOversubscriptionEnabled() {
+    return getBoolean(YarnConfiguration.RM_SCHEDULER_OVERSUBSCRIPTION_ENABLED,
+        YarnConfiguration.DEFAULT_RM_SCHEDULER_OVERSUBSCRIPTION_ENABLED);
+  }
+
   public long getLocalityDelayNodeMs() {
     return getLong(LOCALITY_DELAY_NODE_MS, DEFAULT_LOCALITY_DELAY_NODE_MS);
   }
