@@ -336,15 +336,18 @@ message NodeReportProto {
   optional NodeIdProto nodeId = 1;
   optional string httpAddress = 2;
   optional string rackName = 3;
-  optional ResourceProto used = 4;
+  optional ResourceProto guaranteedResourceUsed = 4;
   optional ResourceProto capability = 5;
-  optional int32 numContainers = 6;
+  optional int32 numGuaranteedContainers = 6;
   optional NodeStateProto node_state = 7;
   optional string health_report = 8;
   optional int64 last_health_report_time = 9;
   repeated string node_labels = 10;
   optional ResourceUtilizationProto containers_utilization = 11;
   optional ResourceUtilizationProto node_utilization = 12;
+  optional int32 numOpportunisticContainers = 13;
+  optional ResourceProto opportunisticResourceUsed = 14;
+  optional int32 numTotalContainers = 15;
 }
 
 message NodeIdToLabelsProto {

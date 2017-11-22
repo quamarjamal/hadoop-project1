@@ -1947,15 +1947,17 @@ public class TestNodeLabelContainerAllocation {
 
     SchedulerNodeReport reportNm1 = rm1.getResourceScheduler()
         .getNodeReport(nm1.getNodeId());
-    Assert.assertEquals(5 * GB, reportNm1.getUsedResource().getMemorySize());
     Assert.assertEquals(5 * GB,
-        reportNm1.getAvailableResource().getMemorySize());
+        reportNm1.getGuaranteedResourceUsed().getMemorySize());
+    Assert.assertEquals(5 * GB,
+        reportNm1.getAvailableGuaranteedResource().getMemorySize());
 
     SchedulerNodeReport reportNm2 = rm1.getResourceScheduler()
         .getNodeReport(nm2.getNodeId());
-    Assert.assertEquals(0 * GB, reportNm2.getUsedResource().getMemorySize());
+    Assert.assertEquals(0 * GB,
+        reportNm2.getGuaranteedResourceUsed().getMemorySize());
     Assert.assertEquals(10 * GB,
-        reportNm2.getAvailableResource().getMemorySize());
+        reportNm2.getAvailableGuaranteedResource().getMemorySize());
 
     LeafQueue leafQueue = (LeafQueue) cs.getQueue("a");
     assertEquals(5 * GB, leafQueue.getMetrics().getAvailableMB());
@@ -2047,15 +2049,17 @@ public class TestNodeLabelContainerAllocation {
 
     SchedulerNodeReport reportNm1 = rm1.getResourceScheduler()
         .getNodeReport(nm1.getNodeId());
-    Assert.assertEquals(3 * GB, reportNm1.getUsedResource().getMemorySize());
+    Assert.assertEquals(3 * GB,
+        reportNm1.getGuaranteedResourceUsed().getMemorySize());
     Assert.assertEquals(7 * GB,
-        reportNm1.getAvailableResource().getMemorySize());
+        reportNm1.getAvailableGuaranteedResource().getMemorySize());
 
     SchedulerNodeReport reportNm2 = rm1.getResourceScheduler()
         .getNodeReport(nm2.getNodeId());
-    Assert.assertEquals(1 * GB, reportNm2.getUsedResource().getMemorySize());
+    Assert.assertEquals(1 * GB,
+        reportNm2.getGuaranteedResourceUsed().getMemorySize());
     Assert.assertEquals(9 * GB,
-        reportNm2.getAvailableResource().getMemorySize());
+        reportNm2.getAvailableGuaranteedResource().getMemorySize());
 
     LeafQueue leafQueue = (LeafQueue) cs.getQueue("a");
     double delta = 0.0001;
