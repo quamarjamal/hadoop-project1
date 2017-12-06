@@ -4904,4 +4904,9 @@ public class BlockManager implements BlockStatsMXBean {
     }
     return i;
   }
+
+  @VisibleForTesting
+  public ProvidedStorageMap getProvidedStorageMap() {
+    return providedStorageMap;
+  }
 }
